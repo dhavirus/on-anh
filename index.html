@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ôn Anh — Học từ vựng và ngữ pháp tiếng Anh</title>
+<meta name="description" content="Ứng dụng học tiếng Anh riêng tư cho gia đình và bạn bè: từ vựng theo chủ đề, ôn tập ngắt quãng, ngữ pháp mở khóa dần, giải thích bằng tiếng Việt.">
+<meta name="theme-color" content="#fbfaf9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#141119" media="(prefers-color-scheme: dark)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Bỏ qua để đến nội dung chính</a>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="#" class="wordmark" aria-label="Ôn Anh, về trang chủ" translate="no">Ôn<span>Anh</span></a>
+    <nav class="nav-links" id="nav-links">
+      <a href="#tinh-nang">Tính năng</a>
+      <a href="#cach-hoat-dong">Cách hoạt động</a>
+    </nav>
+    <div class="nav-actions">
+      <a href="#dang-nhap" class="btn btn-primary btn-sm">Đăng nhập</a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Mở menu" aria-expanded="false" aria-controls="nav-links">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-text reveal">
+        <h1>Từ vựng và ngữ pháp tiếng Anh, đúng tốc độ của bạn.</h1>
+        <p class="subtext">Từ mới theo chủ đề, ôn ngắt quãng, và ngữ pháp được giải thích bằng tiếng Việt, mỗi ngày một buổi vừa sức.</p>
+        <div class="hero-ctas">
+          <a href="#dang-nhap" class="btn btn-primary">Đăng nhập</a>
+          <a href="#cach-hoat-dong" class="btn btn-ghost">Xem cách hoạt động</a>
+        </div>
+      </div>
+
+      <div class="hero-visual reveal" aria-label="Minh họa thẻ từ vựng, có thể tương tác">
+        <div class="flashcard-deck">
+          <button type="button" class="flashcard" id="flashcard" aria-live="polite" aria-label="Nhấn để lật thẻ từ vựng">
+            <span class="flashcard-inner" id="flashcard-inner">
+              <span class="flashcard-face flashcard-front">
+                <span class="fc-word" id="fc-word">consistent</span>
+                <span class="fc-ipa" id="fc-ipa">/kənˈsɪstənt/</span>
+                <span class="fc-hint">Nhấn để xem nghĩa</span>
+              </span>
+              <span class="flashcard-face flashcard-back" id="flashcard-back" aria-hidden="true">
+                <span class="fc-vi" id="fc-vi">nhất quán, đều đặn</span>
+                <span class="fc-example" id="fc-example">She reviews new words at a consistent time every day.</span>
+              </span>
+            </span>
+          </button>
+          <button class="btn btn-ghost btn-sm flashcard-next" id="flashcard-next" type="button">Từ tiếp theo</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features" id="tinh-nang">
+    <h2 class="reveal">Được thiết kế quanh cách bạn thực sự học.</h2>
+    <div class="bento">
+      <article class="bento-cell bento-cell--wide reveal">
+        <h3>Từ vựng theo chủ đề, ôn tập ngắt quãng</h3>
+        <p>Chọn chủ đề bạn quan tâm. Thuật toán lặp lại ngắt quãng tự canh thời điểm ôn lại từng từ, đúng lúc trước khi bạn quên.</p>
+      </article>
+      <article class="bento-cell reveal">
+        <h3>Ngữ pháp mở khóa dần</h3>
+        <p>Làm đúng ổn định một điểm ngữ pháp, điểm đó mới xuất hiện trong bài luyện từ vựng.</p>
+      </article>
+      <article class="bento-cell reveal">
+        <h3>Kế hoạch mỗi ngày</h3>
+        <p>Số từ mới và trọng tâm ngữ pháp điều chỉnh theo phong độ hôm qua, không cố định.</p>
+      </article>
+      <article class="bento-cell reveal">
+        <h3>Giải thích bằng tiếng Việt</h3>
+        <p>Mỗi câu trả lời sai có lời giải ngắn gọn, dựa trên chính câu bạn đã viết.</p>
+      </article>
+      <article class="bento-cell reveal">
+        <h3>Chuỗi ngày học</h3>
+        <p>Một chỉ số đơn giản để giữ nhịp: hoàn thành ít nhất một bài mỗi ngày.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="how-it-works" id="cach-hoat-dong">
+    <h2 class="reveal">Ba bước, mỗi ngày.</h2>
+    <ol class="steps">
+      <li class="step reveal">
+        <span class="step-num">01</span>
+        <h3>Chọn chủ đề</h3>
+        <p>Bắt đầu từ chủ đề bạn thấy hữu ích, không phải danh sách từ ngẫu nhiên.</p>
+      </li>
+      <li class="step reveal">
+        <span class="step-num">02</span>
+        <h3>Luyện mỗi ngày</h3>
+        <p>Một buổi ngắn, kết hợp từ đang ôn và điểm ngữ pháp bạn vừa học.</p>
+      </li>
+      <li class="step reveal">
+        <span class="step-num">03</span>
+        <h3>Theo dõi tiến bộ</h3>
+        <p>Xem điều gì đang tốt lên, điều gì cần ôn thêm, tổng kết mỗi tuần.</p>
+      </li>
+    </ol>
+  </section>
+
+  <section class="grammar-spotlight">
+    <div class="spotlight-text reveal">
+      <h2>Ngữ pháp không rời rạc với từ vựng.</h2>
+      <p>Một điểm ngữ pháp chỉ &ldquo;mở khóa&rdquo; sau khi bạn làm đúng ổn định. Sau đó nó mới xuất hiện trong các câu luyện từ vựng hằng ngày, để bạn thấy ngữ pháp được dùng thật, không chỉ ghi nhớ quy tắc.</p>
+    </div>
+    <div class="spotlight-visual reveal" aria-label="Danh sách các điểm ngữ pháp và trạng thái mở khóa">
+      <ul class="unit-list">
+        <li class="unit-row">
+          <span class="unit-title">Thì hiện tại đơn</span>
+          <span class="unit-status unit-status--unlocked"><i class="status-dot" aria-hidden="true"></i>Đã mở khóa</span>
+        </li>
+        <li class="unit-row">
+          <span class="unit-title">Thì hiện tại tiếp diễn</span>
+          <span class="unit-status unit-status--unlocked"><i class="status-dot" aria-hidden="true"></i>Đã mở khóa</span>
+        </li>
+        <li class="unit-row">
+          <span class="unit-title">Thì quá khứ đơn</span>
+          <span class="unit-status unit-status--progress"><i class="status-dot" aria-hidden="true"></i>Đang học</span>
+        </li>
+        <li class="unit-row unit-row--locked">
+          <span class="unit-title">Động từ khuyết thiếu</span>
+          <span class="unit-status unit-status--locked"><i class="status-dot" aria-hidden="true"></i>Khóa</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="note">
+    <div class="note-inner reveal">
+      <h2>Được xây dựng cho một nhóm nhỏ.</h2>
+      <p>Ôn Anh không phải một sản phẩm thương mại. Đây là công cụ được làm cho gia đình và vài người bạn cùng học tiếng Anh, để mỗi buổi ôn tập ngắn gọn, đúng trình độ, và không ai phải tự đoán mình sai ở đâu.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <a href="#" class="wordmark wordmark--sm" translate="no">Ôn<span>Anh</span></a>
+    <p class="footer-note">Làm cho gia đình và bạn bè.</p>
+    <a href="#dang-nhap" class="footer-link">Đăng nhập</a>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

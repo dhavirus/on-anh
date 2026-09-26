@@ -1,0 +1,6 @@
+node_modules/
+scripts/data/
+supabase/.temp/
+supabase/.branches/
+supabase/functions/.env
+.playwright-cli/

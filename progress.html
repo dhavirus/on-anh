@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tiến độ — Ôn Anh</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="app.html" class="wordmark" translate="no">Ôn<span>Anh</span></a>
+    <nav class="nav-links" id="nav-links">
+      <a href="app.html#topics" class="tab-link">Chủ đề</a>
+      <a href="app.html#review" class="tab-link">Ôn tập hôm nay</a>
+      <a href="grammar.html" class="tab-link">Ngữ pháp</a>
+      <span class="tab-link tab-link-active">Tiến độ</span>
+    </nav>
+    <div class="nav-actions">
+      <span id="user-greeting" class="user-greeting"></span>
+      <button class="btn btn-ghost btn-sm" id="signout-btn" type="button">Đăng xuất</button>
+      <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Mở menu" aria-expanded="false" aria-controls="nav-links">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main" class="app-main">
+  <section class="app-view">
+    <div class="topic-detail-header">
+      <h1>Tiến độ</h1>
+      <label id="learner-picker" class="learner-picker" hidden>
+        Học viên
+        <select id="learner-select"></select>
+      </label>
+    </div>
+
+    <div class="stat-tiles" aria-live="polite">
+      <div class="stat-tile"><span class="stat-value" id="stat-words">–</span><span class="stat-label">từ trong bộ thẻ</span></div>
+      <div class="stat-tile"><span class="stat-value" id="stat-streak">–</span><span class="stat-label">ngày liên tiếp</span></div>
+      <div class="stat-tile"><span class="stat-value" id="stat-accuracy">–</span><span class="stat-label">trả lời đúng (7 ngày)</span></div>
+    </div>
+
+    <figure class="chart-card">
+      <figcaption>Số lượt luyện tập mỗi ngày (30 ngày qua)</figcaption>
+      <div id="chart-daily" class="chart"></div>
+      <details><summary>Xem bảng số liệu</summary><table id="table-daily" class="data-table"></table></details>
+    </figure>
+
+    <figure class="chart-card">
+      <figcaption>Độ chính xác theo bài ngữ pháp</figcaption>
+      <div id="chart-units" class="chart"></div>
+      <details><summary>Xem bảng số liệu</summary><table id="table-units" class="data-table"></table></details>
+    </figure>
+
+    <h2 class="insights-heading">Nhận xét hằng tuần</h2>
+    <ul id="insights-list" class="insights-list"></ul>
+  </section>
+</main>
+
+<script src="config.js"></script>
+<script src="auth.js"></script>
+<script src="progress.js"></script>
+</body>
+</html>

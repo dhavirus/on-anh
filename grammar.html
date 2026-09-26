@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ngữ pháp — Ôn Anh</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="app.html" class="wordmark" translate="no">Ôn<span>Anh</span></a>
+    <nav class="nav-links" id="nav-links">
+      <a href="app.html#topics" class="tab-link">Chủ đề</a>
+      <a href="app.html#review" class="tab-link">Ôn tập hôm nay</a>
+      <span class="tab-link tab-link-active">Ngữ pháp</span>
+      <a href="progress.html" class="tab-link">Tiến độ</a>
+    </nav>
+    <div class="nav-actions">
+      <span id="user-greeting" class="user-greeting"></span>
+      <button class="btn btn-ghost btn-sm" id="signout-btn" type="button">Đăng xuất</button>
+      <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Mở menu" aria-expanded="false" aria-controls="nav-links">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main" class="app-main">
+
+  <section id="view-units" class="app-view">
+    <h1>Ngữ pháp</h1>
+    <ul id="units-list" class="unit-list" aria-live="polite"></ul>
+  </section>
+
+  <section id="view-unit-detail" class="app-view" hidden>
+    <button class="btn btn-ghost btn-sm back-btn" id="back-to-units" type="button">← Ngữ pháp</button>
+    <h1 id="unit-title"></h1>
+    <p id="unit-meta" class="unit-meta"></p>
+    <div id="unit-explanation" class="unit-explanation"></div>
+
+    <div id="exercise-wrap" class="exercise-wrap">
+      <p class="review-progress" id="exercise-progress"></p>
+      <form id="exercise-form">
+        <p class="exercise-prompt" id="exercise-prompt"></p>
+        <div id="exercise-input-area"></div>
+        <button type="submit" class="btn btn-primary" id="exercise-submit">Kiểm tra</button>
+      </form>
+      <div id="exercise-feedback" class="exercise-feedback" hidden>
+        <p id="feedback-verdict"></p>
+        <p id="feedback-explanation"></p>
+        <button type="button" class="btn btn-primary" id="exercise-next">Câu tiếp theo</button>
+      </div>
+    </div>
+    <div id="unit-done" class="unit-done" hidden>
+      <p id="unit-done-summary"></p>
+    </div>
+  </section>
+
+</main>
+
+<script src="config.js"></script>
+<script src="auth.js"></script>
+<script src="grammar.js"></script>
+</body>
+</html>

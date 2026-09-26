@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ôn Anh</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="app.html" class="wordmark" translate="no">Ôn<span>Anh</span></a>
+    <nav class="nav-links" id="nav-links">
+      <button class="tab-link" data-view="topics" type="button">Chủ đề</button>
+      <button class="tab-link" data-view="review" type="button">Ôn tập hôm nay <span id="due-badge" class="due-badge" hidden>0</span></button>
+      <a href="grammar.html" class="tab-link">Ngữ pháp</a>
+      <a href="progress.html" class="tab-link">Tiến độ</a>
+    </nav>
+    <div class="nav-actions">
+      <span id="user-greeting" class="user-greeting"></span>
+      <button class="btn btn-ghost btn-sm" id="signout-btn" type="button">Đăng xuất</button>
+      <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Mở menu" aria-expanded="false" aria-controls="nav-links">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main" class="app-main">
+
+  <section id="view-topics" class="app-view">
+    <div id="today-strip" class="today-strip" aria-live="polite" hidden>
+      <span id="streak-chip" class="today-chip"></span>
+      <span id="plan-chip" class="today-chip"></span>
+    </div>
+    <h1>Chọn một chủ đề</h1>
+    <div id="topics-grid" class="topics-grid" aria-live="polite"></div>
+  </section>
+
+  <section id="view-topic-detail" class="app-view" hidden>
+    <button class="btn btn-ghost btn-sm back-btn" id="back-to-topics" type="button">← Chủ đề</button>
+    <div class="topic-detail-header">
+      <h1 id="topic-detail-title"></h1>
+      <button class="btn btn-primary" id="generate-practice-btn" type="button">Tạo bài luyện tập</button>
+    </div>
+    <ul id="word-list" class="word-list" aria-live="polite"></ul>
+  </section>
+
+  <section id="view-review" class="app-view" hidden>
+    <h1>Ôn tập hôm nay</h1>
+    <div id="review-empty" class="review-empty" hidden>
+      <p>Không còn từ nào cần ôn hôm nay. Quay lại vào ngày mai nhé.</p>
+    </div>
+    <div id="review-card-wrap" class="review-card-wrap" hidden>
+      <p class="review-progress" id="review-progress"></p>
+      <button type="button" class="flashcard" id="review-card" aria-live="polite" aria-label="Nhấn để lật thẻ">
+        <span class="flashcard-inner" id="review-card-inner">
+          <span class="flashcard-face flashcard-front">
+            <span class="fc-word" id="review-word"></span>
+            <span class="fc-ipa" id="review-pos"></span>
+            <span class="fc-hint">Nhấn để xem nghĩa</span>
+          </span>
+          <span class="flashcard-face flashcard-back" id="review-back" aria-hidden="true">
+            <span class="fc-vi" id="review-definition">Đang tải…</span>
+            <span class="fc-example" id="review-example"></span>
+          </span>
+        </span>
+      </button>
+      <div class="grade-buttons" id="grade-buttons" hidden>
+        <button class="btn btn-grade grade-again" data-quality="1" type="button">Lại</button>
+        <button class="btn btn-grade grade-hard" data-quality="3" type="button">Khó</button>
+        <button class="btn btn-grade grade-good" data-quality="4" type="button">Tốt</button>
+        <button class="btn btn-grade grade-easy" data-quality="5" type="button">Dễ</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script src="config.js"></script>
+<script src="auth.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
