@@ -181,13 +181,41 @@ async function startReview() {
   const today = todayInTz();
   const { data, error } = await supabaseClient
     .from('user_word_progress')
-    .select('id, word_id, ease_factor, interval_days, repetitions, lapses, word_bank(lemma, pos)')
+    .select('id, word_id, ease_factor, interval_days, repetitions, lapses, word_bank(lemma, pos, meaning_vi, example_en, example_vi)')
     .lte('next_review_date', today)
     .order('next_review_date', { ascending: true });
 
   dueQueue = error ? [] : data;
   dueIndex = 0;
   renderReviewStep();
+  defineMissing(dueQueue);
+}
+
+// Words without a cached Vietnamese meaning get one from define-words
+// (generated once, then shared). Fetched in the background, 10 per call.
+function defineMissing(queue) {
+  const missing = queue.filter((i) => !i.word_bank.meaning_vi);
+  for (let k = 0; k < missing.length; k += 10) {
+    const chunk = missing.slice(k, k + 10);
+    supabaseClient.functions
+      .invoke('define-words', { body: { word_ids: chunk.map((i) => i.word_id) } })
+      .then(({ data }) => {
+        for (const i of chunk) {
+          const w = (data?.words || []).find((x) => x.id === i.word_id);
+          if (w?.meaning_vi) Object.assign(i.word_bank, w);
+          else i.word_bank.meaningFailed = true;
+        }
+        if (chunk.includes(dueQueue[dueIndex])) showMeaning(dueQueue[dueIndex]);
+      });
+  }
+}
+
+function showMeaning(item) {
+  const wb = item.word_bank;
+  document.getElementById('review-definition').textContent = wb.meaning_vi
+    || (wb.meaningFailed ? 'Chưa tải được nghĩa của từ này. Bạn vẫn có thể tự chấm điểm.' : 'Đang tải…');
+  document.getElementById('review-example').textContent =
+    wb.example_en ? `${wb.example_en}\n${wb.example_vi || ''}` : '';
 }
 
 function renderReviewStep() {
@@ -206,16 +234,13 @@ function renderReviewStep() {
   document.getElementById('review-progress').textContent = `${dueIndex + 1} / ${dueQueue.length}`;
   document.getElementById('review-word').textContent = item.word_bank.lemma;
   document.getElementById('review-pos').textContent = item.word_bank.pos || '';
-  document.getElementById('review-definition').textContent = 'Đang tải…';
-  document.getElementById('review-example').textContent = '';
+  showMeaning(item);
 
   const card = document.getElementById('review-card');
   const backFace = document.getElementById('review-back');
   card.classList.remove('is-flipped');
   backFace.setAttribute('aria-hidden', 'true');
   document.getElementById('grade-buttons').hidden = true;
-
-  fetchDefinition(item.word_bank.lemma);
 }
 
 document.getElementById('review-card').addEventListener('click', () => {
@@ -248,35 +273,6 @@ document.querySelectorAll('.grade-buttons .btn-grade').forEach((btn) => {
     refreshDueBadge();
   });
 });
-
-// Free, keyless dictionary lookup (ARCHITECTURE.md M2: "manual definitions
-// or a free dictionary API" — no word_bank definition column, no LLM yet).
-async function fetchDefinition(lemma) {
-  const defEl = document.getElementById('review-definition');
-  const exEl = document.getElementById('review-example');
-  let definition = 'Không tìm thấy định nghĩa cho từ này.';
-  let example = '';
-  try {
-    // The free API can hang for 20s+ or return 5xx; give up quickly instead.
-    const res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(lemma)}`, {
-      signal: AbortSignal.timeout(6000),
-    });
-    if (res.ok) {
-      const [entry] = await res.json();
-      const def = entry.meanings?.[0]?.definitions?.[0];
-      if (def?.definition) definition = def.definition;
-      example = def?.example || '';
-    } else if (res.status !== 404) {
-      definition = 'Chưa tải được định nghĩa (từ điển đang bận). Bạn vẫn có thể tự chấm điểm.';
-    }
-  } catch {
-    definition = 'Chưa tải được định nghĩa (từ điển đang bận). Bạn vẫn có thể tự chấm điểm.';
-  }
-  // A slow answer for an earlier card must not overwrite the one now on screen.
-  if (dueQueue[dueIndex]?.word_bank.lemma !== lemma) return;
-  defEl.textContent = definition;
-  exEl.textContent = example;
-}
 
 async function refreshDueBadge() {
   const today = todayInTz();

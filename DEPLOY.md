@@ -32,7 +32,7 @@ Steps marked **(you)** need a browser or your credentials; the rest are commands
    python3 scripts/import_efllex.py | $PSQL
    python3 scripts/tag_topics.py   | $PSQL
    ```
-5. Edge Function secrets, then deploy all four functions:
+5. Edge Function secrets, then deploy all five functions:
    ```bash
    CRON_SECRET=$(openssl rand -hex 24); echo "$CRON_SECRET"   # keep it for step 6
    npx supabase secrets set ANTHROPIC_API_KEY=<key> CRON_SECRET=$CRON_SECRET

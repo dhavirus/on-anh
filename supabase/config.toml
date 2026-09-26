@@ -450,3 +450,9 @@ enabled = true
 verify_jwt = false
 import_map = "./functions/weekly-insight/deno.json"
 entrypoint = "./functions/weekly-insight/index.ts"
+
+[functions.define-words]
+enabled = true
+verify_jwt = false
+import_map = "./functions/define-words/deno.json"
+entrypoint = "./functions/define-words/index.ts"
