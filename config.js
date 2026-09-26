@@ -8,7 +8,7 @@ if (IS_LOCAL) {
   window.SUPABASE_URL = 'http://127.0.0.1:54321';
   window.SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6ImFub24iLCJleHAiOjE5ODM4MTI5OTZ9.CRXP1A7WOeoJeXxjNni43kdQwgnWNReilDMblYTn_I0';
 } else {
-  // Hosted project: Dashboard → Project Settings → API. Fill in at deploy time (DEPLOY.md step 3).
-  window.SUPABASE_URL = 'https://YOUR-PROJECT-REF.supabase.co';
-  window.SUPABASE_ANON_KEY = 'YOUR-ANON-KEY';
+  // Hosted project (dao-english-learning-page). Anon key only, never the service-role key.
+  window.SUPABASE_URL = 'https://xzljiqqouehwlstdrdeu.supabase.co';
+  window.SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh6bGppcXFvdWVod2xzdGRyZGV1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAxNTEyNzQsImV4cCI6MjEwNTcyNzI3NH0.mL03WwN2463oCvyHCFeDKvBxVUp0qvHigNLuOBqW2LE';
 }
