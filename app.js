@@ -254,18 +254,28 @@ document.querySelectorAll('.grade-buttons .btn-grade').forEach((btn) => {
 async function fetchDefinition(lemma) {
   const defEl = document.getElementById('review-definition');
   const exEl = document.getElementById('review-example');
+  let definition = 'Không tìm thấy định nghĩa cho từ này.';
+  let example = '';
   try {
-    const res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(lemma)}`);
-    if (!res.ok) throw new Error('not found');
-    const [entry] = await res.json();
-    const meaning = entry.meanings?.[0];
-    const def = meaning?.definitions?.[0];
-    defEl.textContent = def?.definition || 'Không tìm thấy định nghĩa.';
-    exEl.textContent = def?.example || '';
+    // The free API can hang for 20s+ or return 5xx; give up quickly instead.
+    const res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(lemma)}`, {
+      signal: AbortSignal.timeout(6000),
+    });
+    if (res.ok) {
+      const [entry] = await res.json();
+      const def = entry.meanings?.[0]?.definitions?.[0];
+      if (def?.definition) definition = def.definition;
+      example = def?.example || '';
+    } else if (res.status !== 404) {
+      definition = 'Chưa tải được định nghĩa (từ điển đang bận). Bạn vẫn có thể tự chấm điểm.';
+    }
   } catch {
-    defEl.textContent = 'Không tìm thấy định nghĩa cho từ này.';
-    exEl.textContent = '';
+    definition = 'Chưa tải được định nghĩa (từ điển đang bận). Bạn vẫn có thể tự chấm điểm.';
   }
+  // A slow answer for an earlier card must not overwrite the one now on screen.
+  if (dueQueue[dueIndex]?.word_bank.lemma !== lemma) return;
+  defEl.textContent = definition;
+  exEl.textContent = example;
 }
 
 async function refreshDueBadge() {
